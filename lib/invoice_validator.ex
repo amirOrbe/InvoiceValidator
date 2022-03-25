@@ -7,8 +7,10 @@ defmodule InvoiceValidator do
         %DateTime{day: emisor_day, minute: emisor_minute} = _emisor_date,
         %DateTime{day: pac_day, minute: pac_minute} = _pac_date
       ) do
+    IO.inspect(emisor_day - pac_day)
+
     cond do
-        (emisor_day - pac_day) > 3 ->
+        (emisor_day - pac_day) < -3 ->
         {:error, "Invoice was issued more than 72 hrs before received by the PAC"}
 
       emisor_minute - pac_minute > 5 ->
